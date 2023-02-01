@@ -41,10 +41,11 @@ class CrudController extends Controller
         //        ];  //laravel or phpstrom not supported arabic but it works
 
         $rules= $this->getRules();
+        $message=$this->getMessage();
 
-        $validator= Validator::make($request-> all(),$rules);
+        $validator= Validator::make($request-> all(),$rules, $message);
         if($validator -> fails()){
-            return $validator->errors();
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
         //insert data after validate
 
@@ -54,13 +55,21 @@ class CrudController extends Controller
             'details'=>$request -> details
         ]);
 
-        return 'saved sucessfuly';
+        return redirect()->back()->with(['success'=>'the data has been stored successfuly']);
     }
     public  function getRules(){
         return [
             'name'=>'required|max:100|unique:offers,name',
             'price'=>'required|numeric',
             'details'=>'required'
+        ];
+    }
+    public  function getMessage(){
+        return [
+            'name.requires'=>'the name must be entered',
+            'name.unique'=>'the name of offer must be unique',
+            'price.numeric'=>'the price must be number',
+            'details.required'=>'the details of offer must be entered',
         ];
     }
 
