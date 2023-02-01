@@ -23,10 +23,12 @@ Route::get('/', function () {
 });
 
 */
+
+/*
 Route::get('/', function () {
     echo File::get(storage_path('app/Console/Commands/Notify.php'));
 });
-
+*/
 
 Route::get('/fillable','App\Http\Controllers\CrudController@getOffer');
 
