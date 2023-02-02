@@ -58,18 +58,18 @@ class CrudController extends Controller
         return redirect()->back()->with(['success'=>'the data has been stored successfuly']);
     }
     public  function getRules(){
-        return [
+        return $rules=[
             'name'=>'required|max:100|unique:offers,name',
             'price'=>'required|numeric',
             'details'=>'required'
         ];
     }
     public  function getMessage(){
-        return [
-            'name.requires'=>'the name must be entered',
-            'name.unique'=>'the name of offer must be unique',
-            'price.numeric'=>'the price must be number',
-            'details.required'=>'the details of offer must be entered',
+        return $message=[
+            'name.required'=>__('message.offer name required'),
+            'name.unique'=>__('message.offer name unique'),
+            'price.numeric'=>__('message.offer price numeric'),
+            'details.required'=>__('message.offer details'),
         ];
     }
 
