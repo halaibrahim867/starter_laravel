@@ -19,7 +19,11 @@ return [
         "Enter offer details en"=>"Enter offer details in english",
         "Offer details ar"=>"Offer details in arabic",
         "Enter offer details ar"=>"Enter offer details in arabic",
-        "Save"=>"Save"
+        "Save"=>"Save",
+        "operation"=>"operation",
+        "update"=>"update",
+        "Edit Your Offer"=>"Edit Your Offer",
+        "choose your photo"=>"choose your photo"
 
 
     ];

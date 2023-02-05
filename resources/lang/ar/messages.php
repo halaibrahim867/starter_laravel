@@ -21,5 +21,8 @@ return [
     "Offer details en"=>"  تفاصيل العرض بالانجليزي",
     "Enter offer details en"=>" ادخل تفاصيل العرض بالاجليزي",
     "Save"=>"حفظ",
-
+    "operation"=>"العمليات",
+    "update"=>"تحديث",
+    "Edit Your Offer"=>"تعديل العرض",
+    "choose your photo"=>"اختر صورتك"
 ];

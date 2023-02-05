@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\OfferRequest;
+use App\Traits\offerTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Offer;
@@ -11,8 +12,7 @@ use Illuminate\Http\Request;
 class CrudController extends Controller
 {
     //
-
-
+    use offerTrait;
     public function  getOffer(){
         return Offer::get()->toArray();
     }
@@ -52,16 +52,22 @@ class CrudController extends Controller
         }*/
         //insert data after validate
 
+
+        $file_name=$this ->saveImage($request -> photo,'images/offers' );
+
         Offer::create([
             'name_ar'=> $request-> name_ar ,
             'name_en'=>$request -> name_en,
             'price'=>$request-> price,
             'details_ar'=>$request -> details_ar,
-            'details_en'=>$request ->details_en
+            'details_en'=>$request ->details_en,
+            'photo'=>$file_name,
         ]);
 
         return redirect()->back()->with(['success'=>'the data has been stored successfuly']);
     }
+
+
 
     /*
     public  function getRules(){
@@ -87,10 +93,39 @@ class CrudController extends Controller
             'price',
             'name_' . LaravelLocalization::getCurrentLocale() . ' as name',
             'details_' . LaravelLocalization::getCurrentLocale() . ' as details')
-            ->get();
+            ->get(); //return array of collection
         return view('offers.all',compact('offers'));
     }
 
+
+    public  function editOffer($offer_id)
+    {
+        //Offer::findOrFail($offer_id);
+
+        $offer=Offer::find($offer_id);
+
+        if(!$offer){ //there is not data in tabel of id
+            return redirect()->back();
+        }
+
+        Offer::select('id','name_ar','name_en','price','details_ar','details_en')->find($offer_id);
+        return view('offers.edit',compact('offer'));
+
+    }
+
+    public  function updateOffer(OfferRequest $request, $offer_id)
+    {
+        $offer=Offer::find($offer_id);
+
+        if(!$offer){ //there is not data in tabel of id
+            return redirect()->back();
+        }
+
+        $offer -> update($request ->all());
+
+        return redirect()->back()->with(['success'=>'تم التحديث بنجاح']);
+
+    }
 }
 
 //

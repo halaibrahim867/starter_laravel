@@ -106,8 +106,18 @@
         @endif
         <br>
 
-        <form method="post" action="{{url('offers\store')}}">
+        <form method="post" action="{{url('offers\store')}}" enctype="multipart/form-data">
             @csrf
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">{{__("messages.choose your photo")}}</label>
+                <input type="file"" class="form-control" id="exampleInputEmail1" name="photo">
+                @error('photo')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror
+            </div>
+
+
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">{{__("messages.Offer Name ar")}}</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" name="name_ar" placeholder="{{__('messages.Enter offer name ar')}}">

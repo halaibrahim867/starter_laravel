@@ -41,7 +41,8 @@ Route::group(['prefix'=>LaravelLocalization::setLocale() ,'middleware' => [ 'loc
         Route::post('store','App\Http\Controllers\CrudController@store');
         Route::get('all','App\Http\Controllers\CrudController@getAllOffers');
 
-
+        Route::get('edit/{offer_id}','App\Http\Controllers\CrudController@editOffer');
+        Route::post('update/{offer_id}','App\Http\Controllers\CrudController@updateOffer')->name('offers.update');
     });
 
 });

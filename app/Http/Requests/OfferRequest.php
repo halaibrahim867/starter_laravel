@@ -34,10 +34,13 @@ class OfferRequest extends FormRequest
     public  function messages()
     {
         return [
-            'name.required'=>__('messages.offer name required'),
-            'name.unique'=>__('messages.offer name unique'),
+            'name_ar.required'=>__('messages.offer name required'),
+            'name_ar.unique'=>__('messages.offer name unique'),
+            'name_en.required'=>__('messages.offer name required'),
+            'name_en.unique'=>__('messages.offer name unique'),
             'price.numeric'=>__('messages.offer price numeric'),
-            'details.required'=>__('messages.details required'),
+            'details_ar.required'=>__('messages.details required'),
+            'details_en.required'=>__('messages.details required'),
         ];
     }
 

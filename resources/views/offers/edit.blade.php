@@ -91,30 +91,62 @@
     </div>
 </nav>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">{{__('messages.Offer Name')}}</th>
-        <th scope="col">{{__('messages.Offer Price')}}</th>
-        <th scope="col">{{__('messages.Offer Details')}}</th>
-        <th scope="col">{{__('messages.operation')}}</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach($offers as $offer)
-        <tr>
-            <th scope="row">{{$offer -> id}}</th>
-            <td>{{$offer -> name}}</td>
-            <td>{{$offer -> price}}</td>
-            <td>{{$offer -> details}}</td>
-            <td> <a href="{{url('offers/edit/'. $offer->id)}}" class="btn btn-success">{{__('messages.update')}}</a> </td>
-        </tr>
-    @endforeach
+
+    <div class="title m-b-md">
+        <h1>
+            {{__('messages.Edit Your Offer')}}
+        </h1>
+    </div>
 
 
-    </tbody>
-</table>
+        @if(Session::has('success'));
+        <div class="alert alert-success" role="alert">
+            {{Session::get('success')}}
+        </div>
+        @endif
+        <br>
+
+        <form method="post" action="{{route('offers.update',$offer -> id)}}">
+            @csrf
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">{{__("messages.Offer Name ar")}}</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="name_ar" value="{{$offer -> name_ar}}" placeholder="{{__('messages.Enter offer name ar')}}">
+                @error('name_ar')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">{{__("messages.Offer Name en")}}</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="name_en" value="{{$offer->name_en}}" placeholder="{{__('messages.Enter offer name en')}}">
+                @error('name_en')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">{{__('messages.Offer Price')}}</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="price" value="{{$offer->price}}" placeholder="{{__("messages.Enter offer price")}}">
+                @error('price')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">{{__('messages.Offer details ar')}}</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="details_ar" value="{{$offer->details_ar}}" placeholder="{{__('messages.Enter offer details ar')}}">
+                @error('details_ar')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">{{__('messages.Offer details en')}}</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="details_en" value="{{$offer->details_en}}" placeholder="{{__('messages.Enter offer details en')}}">
+                @error('details_en')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            <button type="submit" class="btn btn-primary">{{__('messages.Save')}}</button>
+        </form>
 
 
 </body>
