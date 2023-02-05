@@ -39,6 +39,9 @@ Route::group(['prefix'=>LaravelLocalization::setLocale() ,'middleware' => [ 'loc
 
         Route::get('create','App\Http\Controllers\CrudController@create');
         Route::post('store','App\Http\Controllers\CrudController@store');
+        Route::get('all','App\Http\Controllers\CrudController@getAllOffers');
+
+
     });
 
 });
