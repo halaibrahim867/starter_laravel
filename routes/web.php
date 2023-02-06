@@ -45,4 +45,5 @@ Route::group(['prefix'=>LaravelLocalization::setLocale() ,'middleware' => [ 'loc
         Route::post('update/{offer_id}','App\Http\Controllers\CrudController@updateOffer')->name('offers.update');
     });
 
+    Route::get('youtube','App\Http\Controllers\crudController@getVideo');
 });

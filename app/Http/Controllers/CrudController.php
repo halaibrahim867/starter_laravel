@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Events\videoViewer;
 use App\Http\Requests\OfferRequest;
+use App\Models\Video;
 use App\Traits\offerTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
@@ -126,6 +128,14 @@ class CrudController extends Controller
         return redirect()->back()->with(['success'=>'تم التحديث بنجاح']);
 
     }
+
+    public function getVideo(){
+        $video=Video::first();
+
+        event(new videoViewer($video));
+        return view('video')->with('video',$video);
+    }
+
 }
 
 //
