@@ -24,5 +24,9 @@ return [
     "operation"=>"العمليات",
     "update"=>"تحديث",
     "Edit Your Offer"=>"تعديل العرض",
-    "choose your photo"=>"اختر صورتك"
+    "choose your photo"=>"اختر صورتك",
+    "delete"=>"حذف",
+    "offer not exist"=>"العرض غير موجود",
+    "offer deleted successfully"=>"تم مسح العرض بنجاح",
+
 ];

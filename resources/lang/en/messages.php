@@ -23,7 +23,10 @@ return [
         "operation"=>"operation",
         "update"=>"update",
         "Edit Your Offer"=>"Edit Your Offer",
-        "choose your photo"=>"choose your photo"
+        "choose your photo"=>"choose your photo",
+        "delete"=>"delete",
+        "offer not exist"=>"offer not exist",
+        "offer deleted successfully"=>"offer deleted successfully",
 
 
     ];
