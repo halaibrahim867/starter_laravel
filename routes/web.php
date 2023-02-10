@@ -59,10 +59,18 @@ Route::group(['prefix'=>'ajax-offers'],function(){
     Route::get('create','App\Http\Controllers\OfferController@create');
     Route::post('store','App\Http\Controllers\OfferController@store')
         ->name('ajax.offers.store');
+
     Route::get('all','App\Http\Controllers\OfferController@all')
         ->name('ajax.offers.all');
+
     Route::post('delete','App\Http\Controllers\OfferController@delete')
         ->name('ajax.offers.delete');
+
+    Route::get('edit/{offer_id}','App\Http\Controllers\OfferController@edit')
+        ->name('ajax.offers.edit');
+
+    Route::post('update','App\Http\Controllers\OfferController@update')
+        ->name('ajax.offers.update');
 });
 
 

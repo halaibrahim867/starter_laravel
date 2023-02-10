@@ -11,6 +11,7 @@
             <th scope="col">{{__('messages.Offer Name')}}</th>
             <th scope="col">{{__('messages.Offer Price')}}</th>
             <th scope="col">{{__('messages.Offer Details')}}</th>
+            <th scope="col">Photo of image</th>
             <th scope="col">{{__('messages.operation')}}</th>
         </tr>
         </thead>
@@ -25,6 +26,7 @@
                 <td> <a href="{{url('offers/edit/'. $offer->id)}}" class="btn btn-success">{{__('messages.update')}}</a> </td>
                 <td> <a href="{{route('offers.delete',$offer->id)}}" class="btn btn-danger">{{__('messages.delete')}}</a> </td>
                 <td> <a href="" offer_id="{{$offer->id}}" class="delete_btn btn btn-danger">delete ajax</a> </td>
+                <td> <a href="{{route('ajax.offers.edit',$offer->id)}}" class="btn btn-danger">Edit</a> </td>
 
             </tr>
         @endforeach

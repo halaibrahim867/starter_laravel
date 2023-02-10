@@ -72,4 +72,39 @@ class OfferController extends Controller
         ]);
 
     }
+    public function edit(Request  $request){
+        //Offer::findOrFail($offer_id);
+
+        $offer=Offer::find($request->offer_id);
+
+        if(!$offer){ //there is not data in tabel of id
+            return response()-> json([
+                'status' =>false,
+                'msg' => 'this offer is not exist'
+            ]);
+        }
+
+        Offer::select('id','name_ar','name_en','price','details_ar','details_en')->find($request->offer_id);
+        return view('ajaxoffers.edit',compact('offer'));
+
+    }
+    public  function update(Request $request){
+        $offer=Offer::find($request->offer_id);
+
+        if(!$offer){ //there is not data in tabel of id
+            return response()-> json([
+                'status' =>false,
+                'msg' => 'This offer is not exist'
+            ]);
+        }
+
+        $offer -> update($request ->all());
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'updated successfully',
+
+        ]);
+    }
+
 }
