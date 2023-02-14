@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -20,9 +21,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
-        'password',
         'mobile',
-        'expire'
+        'password',
+        'age',
+        'expire',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -47,4 +51,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function pluck(string $string)
     {
     }
+
+
+    ############# Begin Relations ###############
+
+    public function phone(){
+        return $this-> hasOne('App\Models\Phone','user_id');
+    }
+
+    ############## End Relations   ##############
 }

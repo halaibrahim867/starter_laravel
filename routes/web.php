@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -14,16 +15,16 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-/*
+
 Auth::routes(['verify' =>true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')-> middleware('verified');
+Route::get('/home','App\Http\Controllers\HomeController@index')
+    ->name('home')-> middleware('verified');
 
 Route::get('/', function () {
     return 'Home';
 });
 
-*/
 
 /*
 Route::get('/', function () {
@@ -50,7 +51,6 @@ Route::group(['prefix'=>LaravelLocalization::setLocale() ,'middleware' => [ 'loc
 
     Route::get('youtube','App\Http\Controllers\crudController@getVideo');
 });
-
 
 
 ############### Begin Ajax routes ##############
@@ -80,3 +80,65 @@ Route::group(['prefix'=>'ajax-offers'],function(){
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+######### Begin  Authentication && Guard ##############
+Route::get('/dashboard',function (){
+    return 'Not adult';
+})->name('not.allowed');
+
+Route::group(['middleware'=>'checkage'],function(){
+Route::get('/adult','App\Http\Controllers\Auth\CustomAuthController@adult')
+    ->name('adult');
+});
+
+
+/*
+Route::get('adult','App\Http\Controllers\Auth\CustomAuthController@adult')
+        ->middleware('checkage');
+*/
+######## End  Authentication && Guard ###############
+
+
+Route::get('/index','App\Http\Controllers\Auth\CustomAuthController@show') ;
+
+Route::get('/site','App\Http\Controllers\Auth\CustomAuthController@site')
+    ->middleware('auth:web')->name('site');
+
+Route::get('/admin','App\Http\Controllers\Auth\CustomAuthController@admin')
+    ->middleware('auth:admin')->name('admin');
+
+
+Route::get('admin/login','App\Http\Controllers\Auth\CustomAuthController@adminLogin')
+    ->name('admin.login');
+
+Route::post('admin/login','App\Http\Controllers\Auth\CustomAuthController@checkAdminLogin')
+    ->name('save.admin.login');
+
+
+
+
+/*
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('customAuth.index');
+    });
+});*/
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+###############   Begin Relations ############3
+
+Route::get('has-one','App\Http\Controllers\Relations\RelationController@hasOneRelation');
+
+Route::get('has-one-reverse','App\Http\Controllers\Relations\RelationController@hasOneRelationReverse');
+
+Route::get('get-user-has-phone','App\Http\Controllers\Relations\RelationController@getUserHasPhone');
+
+Route::get('get-user-not-has-phone','App\Http\Controllers\Relations\RelationController@getUserHasNotPhone');
+
+##############   End Relations ###############
