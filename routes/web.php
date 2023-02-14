@@ -131,7 +131,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-###############   Begin Relations ############3
+###############   Begin one to one Relations ############3
 
 Route::get('has-one','App\Http\Controllers\Relations\RelationController@hasOneRelation');
 
@@ -141,4 +141,26 @@ Route::get('get-user-has-phone','App\Http\Controllers\Relations\RelationControll
 
 Route::get('get-user-not-has-phone','App\Http\Controllers\Relations\RelationController@getUserHasNotPhone');
 
-##############   End Relations ###############
+##############   End one to one Relations ###############
+
+
+###############   Begin one to many Relations ############3
+
+Route::get('hospital-has-many','App\Http\Controllers\Relations\RelationController@getHospitalDoctor');
+
+Route::get('hospitals','App\Http\Controllers\Relations\RelationController@getHospitals')
+        ->name('hospitals.all');
+
+Route::get('doctors/{hospital_id}','App\Http\Controllers\Relations\RelationController@getDoctors')
+    ->name('hospital.doctors');
+
+Route::get('hospitals/{hospital_id}','App\Http\Controllers\Relations\RelationController@deleteHospital')
+        ->name('hospital.delete');
+
+Route::get('hospitals-has-doctors','App\Http\Controllers\Relations\RelationController@hospitalHasDoctors');
+
+Route::get('hospitals-has-doctors-male','App\Http\Controllers\Relations\RelationController@hospitalsHasDoctorsMale');
+
+Route::get('hospitals-has-not-doctors','App\Http\Controllers\Relations\RelationController@hospitalsHasNotDoctors');
+
+###############   Begin one to many Relations ############3
