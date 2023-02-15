@@ -27,48 +27,48 @@
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">{{__("messages.choose your photo")}}</label>
                 <input type="file" class="form-control" id="exampleInputEmail1" name="photo">
-                @error('photo')
-                <small class="form-text text-danger">{{$message}}</small>
-                @enderror
+
+                <small id="photo_error"  class="form-text text-danger"></small>
+
             </div>
 
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">{{__("messages.Offer Name ar")}}</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" name="name_ar" placeholder="{{__('messages.Enter offer name ar')}}">
-                @error('name_ar')
-                <small class="form-text text-danger">{{$message}}</small>
-                @enderror
+
+                <small id="name_ar_error" class="form-text text-danger"></small>
+
             </div>
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">{{__("messages.Offer Name en")}}</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" name="name_en" placeholder="{{__('messages.Enter offer name en')}}">
-                @error('name_en')
-                <small class="form-text text-danger">{{$message}}</small>
-                @enderror
+
+                <small id="name_en_error" class="form-text text-danger"></small>
+
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">{{__('messages.Offer Price')}}</label>
                 <input type="text" class="form-control" id="exampleInputPassword1" name="price" placeholder="{{__("messages.Enter offer price")}}">
-                @error('price')
-                <small class="form-text text-danger">{{$message}}</small>
-                @enderror
+
+                <small id="price_error" class="form-text text-danger"></small>
+
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">{{__('messages.Offer details ar')}}</label>
                 <input type="text" class="form-control" id="exampleInputPassword1" name="details_ar" placeholder="{{__('messages.Enter offer details ar')}}">
-                @error('details_ar')
-                <small class="form-text text-danger">{{$message}}</small>
-                @enderror
+
+                <small id="details_ar_error" class="form-text text-danger"></small>
+
             </div>
 
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">{{__('messages.Offer details en')}}</label>
                 <input type="text" class="form-control" id="exampleInputPassword1" name="details_en" placeholder="{{__('messages.Enter offer details en')}}">
-                @error('details_en')
-                <small class="form-text text-danger">{{$message}}</small>
-                @enderror
+
+                <small id="details_en_error" class="form-text text-danger"></small>
+
             </div>
             <button id="save_offer" class="btn btn-primary">{{__('messages.Save')}}</button>
         </form>
@@ -82,6 +82,13 @@
     <script>
         $(document).on('click','#save_offer',function(e){
             e.preventDefault();
+
+            $('#photo_error').text('');
+            $('#name_ar_error').text('');
+            $('#name_en_error').text('');
+            $('#price_error').text('');
+            $('#details_ar_error').text('');
+            $('#details_en_error').text('');
 
             let formData =new FormData($('#offerForm')[0]);
             $.ajax({
@@ -97,6 +104,11 @@
                     }
 
                 }, error: function (reject){
+
+                    let response=$.parseJSON(reject.responseText);
+                    $.each(response.errors,function (key, val){
+                        $("#" + key + "_error").text(val[0]);
+                    });
 
                 }
             });

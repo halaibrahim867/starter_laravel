@@ -12,7 +12,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.5",
-        "mcamara/laravel-localization": "^1.7"
+        "mcamara/laravel-localization": "^1.7",
+      "ext-mongodb": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

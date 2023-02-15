@@ -56,7 +56,9 @@ Route::group(['prefix'=>LaravelLocalization::setLocale() ,'middleware' => [ 'loc
 ############### Begin Ajax routes ##############
 
 Route::group(['prefix'=>'ajax-offers'],function(){
-    Route::get('create','App\Http\Controllers\OfferController@create');
+
+    Route::get('/create','App\Http\Controllers\OfferController@create');
+
     Route::post('store','App\Http\Controllers\OfferController@store')
         ->name('ajax.offers.store');
 
@@ -144,12 +146,19 @@ Route::get('get-user-not-has-phone','App\Http\Controllers\Relations\RelationCont
 ##############   End one to one Relations ###############
 
 
-###############   Begin one to many Relations ############3
+###############   Begin many to many Relations ############3
 
 Route::get('hospital-has-many','App\Http\Controllers\Relations\RelationController@getHospitalDoctor');
 
 Route::get('hospitals','App\Http\Controllers\Relations\RelationController@getHospitals')
         ->name('hospitals.all');
+
+Route::get('doctors/services/{doctor_id}','App\Http\Controllers\Relations\RelationController@getDoctorServicesById')
+    ->name('doctors.services');
+
+Route::post('saveServices','App\Http\Controllers\Relations\RelationController@saveServicesToDoctors')
+    ->name('save.doctors.services');
+
 
 Route::get('doctors/{hospital_id}','App\Http\Controllers\Relations\RelationController@getDoctors')
     ->name('hospital.doctors');
@@ -163,4 +172,9 @@ Route::get('hospitals-has-doctors-male','App\Http\Controllers\Relations\Relation
 
 Route::get('hospitals-has-not-doctors','App\Http\Controllers\Relations\RelationController@hospitalsHasNotDoctors');
 
-###############   Begin one to many Relations ############3
+Route::get('doctors-services','App\Http\Controllers\Relations\RelationController@getDoctorServices');
+
+Route::get('services-doctors','App\Http\Controllers\Relations\RelationController@getServicesDoctors');
+
+
+###############   Begin many to many Relations ############3

@@ -111,7 +111,7 @@
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">{{__("messages.choose your photo")}}</label>
-                <input type="file"" class="form-control" id="exampleInputEmail1" name="photo">
+                <input type="file" class="form-control" id="exampleInputEmail1" name="photo">
                 @error('photo')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
