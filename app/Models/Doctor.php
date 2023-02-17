@@ -9,7 +9,7 @@ class Doctor extends Model
 {
     use HasFactory;
     protected $table="doctors";
-    protected $fillable=['id','name','gender','title','hospital_id','created_at','updated_at'];
+    protected $fillable=['id','name','gender','title','hospital_id','medical_id','created_at','updated_at'];
     protected $hidden=['created_at','updated_at','pivot'];
     public $timestamp=true;
 

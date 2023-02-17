@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Relations;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\Doctor;
 use App\Models\Hospital;
+use App\Models\Patient;
 use App\Models\Phone;
 use App\Models\Service;
 use App\Models\User;
@@ -132,4 +134,25 @@ class RelationController extends Controller
     }
 
 
+
+
+    ############ Begin  Has one through methods #########
+
+    public function getPatientDoctor(){
+        $patient=Patient::find(1);
+        return  $patient-> doctor;
+
+    }
+    public  function getCountryDoctors(){
+        // $country=Country::find(1);
+        $country=Country::with('doctors')->find(1); //return country with it's doctors
+
+        return $country;
+    }
+
+    public function getCountryHospitals(){
+        $country=Country::find(1);
+        return $country->hospitals;
+    }
+    ########### End Has one through method ############3
 }

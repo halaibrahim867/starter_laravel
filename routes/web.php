@@ -15,7 +15,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-
+define('PAGINATION_COUNT',5);
 Auth::routes(['verify' =>true]);
 
 Route::get('/home','App\Http\Controllers\HomeController@index')
@@ -45,8 +45,10 @@ Route::group(['prefix'=>LaravelLocalization::setLocale() ,'middleware' => [ 'loc
 
         Route::get('edit/{offer_id}','App\Http\Controllers\CrudController@editOffer');
         Route::post('update/{offer_id}','App\Http\Controllers\CrudController@updateOffer')->name('offers.update');
-        Route::get('delete/{offer_id}','App\Http\Controllers\crudController@deleteOffer')
+        Route::get('delete/{offer_id}','App\Http\Controllers\CrudController@deleteOffer')
             ->name('offers.delete');
+
+        Route::get('get-all-inactive-offer','App\Http\Controllers\CrudController@getAllInactiveOffer');
     });
 
     Route::get('youtube','App\Http\Controllers\crudController@getVideo');
@@ -178,3 +180,13 @@ Route::get('services-doctors','App\Http\Controllers\Relations\RelationController
 
 
 ###############   Begin many to many Relations ############3
+
+################ Begin Has one Through Relationship route  #########################
+
+Route::get('has-one-through','App\Http\Controllers\Relations\RelationController@getPatientDoctor');
+
+Route::get('has-many-through','App\Http\Controllers\Relations\RelationController@getCountryDoctors');
+
+Route::get('country-has-hospitals','App\Http\Controllers\Relations\RelationController@getCountryHospitals');
+
+################# End Has one Through Relationship route   #########################

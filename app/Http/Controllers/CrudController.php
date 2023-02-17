@@ -95,9 +95,12 @@ class CrudController extends Controller
         $offers =Offer::select('id',
             'price',
             'name_' . LaravelLocalization::getCurrentLocale() . ' as name',
-            'details_' . LaravelLocalization::getCurrentLocale() . ' as details')
-            ->get(); //return array of collection
-        return view('offers.all',compact('offers'));
+            'details_' . LaravelLocalization::getCurrentLocale() . ' as details'
+            )->simplePaginate(PAGINATION_COUNT);
+        // ->get();    //return array of collection
+       // return view('offers.all',compact('offers'));
+
+        return view('offers.paginate',compact('offers'));
     }
 
 
@@ -149,6 +152,15 @@ class CrudController extends Controller
 
         event(new videoViewer($video));
         return view('video')->with('video',$video);
+    }
+
+
+    public  function getAllInactiveOffer(){
+        // local scope used in specific model
+        //return Offer::inactive()->get();
+
+        //global scope
+        return Offer::get();
     }
 
 }
